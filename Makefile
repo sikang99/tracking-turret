@@ -1,10 +1,18 @@
 #
 # Makefile
 # 
+PROG=tracking-turret
 usage:
 	@echo "usage: make [edit|build|run]"
 
+build b:
+	go build -o $(PROG) main.go
 
+edit e:
+	vi main.go
+
+run r:
+	./$(PROG)
 #----------------------------------------------------------------------------------
 git g:
 	@echo "make (git:g) [update|store]"

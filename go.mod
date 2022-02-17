@@ -1,4 +1,4 @@
-module github.com/matipan/dartagnan
+module github.com/sikang99/tracking-turret
 
 go 1.17
 

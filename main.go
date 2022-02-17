@@ -9,9 +9,9 @@ import (
 
 	"flag"
 
-	"github.com/matipan/dartagnan/detector"
-	"github.com/matipan/dartagnan/turret"
-	"github.com/matipan/dartagnan/window"
+	"github.com/sikang99/tracking-turret/detector"
+	"github.com/sikang99/tracking-turret/turret"
+	"github.com/sikang99/tracking-turret/window"
 )
 
 const minArea = 7000
