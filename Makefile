@@ -2,6 +2,7 @@
 # Makefile
 # 
 PROG=tracking-turret
+VERSION=1.0.0.1
 usage:
 	@echo "usage: make [edit|build|run]"
 
