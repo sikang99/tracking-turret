@@ -32,7 +32,9 @@ func main() {
 		log.Println(err)
 		os.Exit(1)
 	}
+
 	wm := window.New(800, 600)
+
 	detector, err := detector.New(*device, *area, t.HandleMotion, wm)
 	if err != nil {
 		log.Println(err)
