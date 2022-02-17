@@ -108,7 +108,7 @@ func (d *Detector) scan() bool {
 	gocv.Threshold(d.delta, &d.thresh, 50, 255, gocv.ThresholdBinary)
 	gocv.Dilate(d.thresh, &d.thresh, d.kernel)
 	cnt := bestContour(d.thresh.Clone(), d.area)
-	if len(cnt) > 0 {
+	if !cnt.IsNil() {
 		rect := gocv.BoundingRect(cnt)
 		gocv.Rectangle(&d.frame, rect, rectColor, 2)
 		gocv.PutText(&d.frame, "Motion detected", statusPoint, gocv.FontHersheyPlain, 1.2, textColor, 2)
@@ -135,16 +135,17 @@ func (d *Detector) close() error {
 
 // bestContour obtains the biggest contour in the frame(provided is bigger)
 // than the minArea.
-func bestContour(frame gocv.Mat, minArea float64) []image.Point {
+func bestContour(frame gocv.Mat, minArea float64) gocv.PointVector {
 	cnts := gocv.FindContours(frame, gocv.RetrievalExternal, gocv.ChainApproxSimple)
 	var (
-		bestCnt  []image.Point
+		bestCnt  gocv.PointVector
 		bestArea = minArea
 	)
-	for _, cnt := range cnts {
-		if area := gocv.ContourArea(cnt); area > bestArea {
+	for i := 0; i < cnts.Size(); i++ {
+		area := gocv.ContourArea(cnts.At(i))
+		if area > bestArea {
 			bestArea = area
-			bestCnt = cnt
+			bestCnt = cnts.At(i)
 		}
 	}
 	return bestCnt
